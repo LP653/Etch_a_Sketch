@@ -1,13 +1,15 @@
 let gridSize = 16;
-let maxGridSize = 50;
+let maxGridSize = 64;
 
 let actualGridSize = 656;
 
-let borderSize = 1;
+let borderSize = 2;
 
 let gridSquareSize = actualGridSize/gridSize;
 
 const screen = document.querySelector(".screen");
+screen.style.width = "98vh";
+screen.style.height = "92vh";
 screen.style.display = "flex";
 screen.style.justifyContent = "space-around";
 screen.style.alignItems = "center";
@@ -18,6 +20,8 @@ const buttons = document.createElement("div");
 buttons.setAttribute("class", "buttons");
 screen.appendChild(buttons);
 buttons.style.display = "flex";
+buttons.style.flexDirection = "row";
+buttons.style.justifyContent = "center"
 buttons.style.gap = "8px";
 
 const customButton = document.createElement("button");
@@ -27,7 +31,7 @@ buttons.appendChild(customButton);
 
 customButton.addEventListener('click', () => {
     gridSize = prompt("How many squares per side?");
-    if (gridSize === 0 || gridSize === null) gridSize = 16;
+    if ((gridSize === 0 || gridSize === "")) gridSize = 16;
     if (gridSize > maxGridSize) gridSize = maxGridSize;
     gridSquareSize = actualGridSize/gridSize;
     resetGrid();
@@ -42,11 +46,39 @@ resetButton.addEventListener('click', () => {
     resetGrid();
 });
 
+const button = document.querySelectorAll("button");
+button.forEach((b) => {
+    let bs = b.style;
+    bs.backgroundColor = "#8212de";
+    bs.border = "none";
+    bs.color = "white";
+    bs.padding = "32px 32px";
+    bs.fontSize = "20px";
+    bs.opacity = "0.6";
+    bs.transition = "0.3s";
+    bs.display = "flex";
+    bs.justifyContent = "center";
+    bs.alignItems = "center";
+    bs.textDecoration = "none";
+    bs.cursor = "pointer";
+    bs.width = "196px";
+    bs.height = "102px";
+
+    b.addEventListener('mouseenter', () => {
+        bs.opacity = "1";
+    });
+
+    b.addEventListener('mouseleave', () => {
+        bs.opacity = "0.6";
+    });
+});
+
 const grid = document.createElement("div");
 
 grid.style.width = `${actualGridSize}px`;
 grid.style.height = `${actualGridSize}px`;
-grid.style.border = "solid 2px black";
+grid.style.border = "solid 12px #de72fc";
+grid.style.borderRadius = "10px";
 
 grid.style.display = "flex";
 grid.style.flexWrap = "wrap";
